@@ -1,0 +1,57 @@
+.new-product__form--container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.new-product__form {
+    width: 100%;
+    max-width: 500px;  /* Ancho máximo del formulario */
+    padding: 20px;
+    background-color: #fff;  /* Fondo blanco para el formulario */
+    border-radius: 8px;  /* Bordes redondeados */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);  /* Sombra suave */
+}
+
+.images-preview-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100px, 100%), 1fr));
+    gap: 10px;
+    margin-top: 40px;
+}
+
+.images-preview{
+    width: 100px;
+    display: inline-block;
+    position: relative;
+}
+
+.images-preview img{
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.images-preview i,
+.remove-img-spinner{
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.images-preview i:hover{
+    color: orange;
+}
+
+.new-product__image--container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(https://images.unsplash.com/photo-1616124619460-ff4ed8f4683c?q=80&w=1996&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+    background-size: cover;
+    background-position: center;
+    height: 95vh; 
+}

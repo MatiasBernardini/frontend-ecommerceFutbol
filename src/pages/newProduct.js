@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './NewProduct.css';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
@@ -16,25 +16,42 @@ export default function NewProduct() {
   const navigate = useNavigate();
   const [createProduct, { isError, error, isLoading, isSuccess }] = useCreateProductMutation();
 
+  // Cargar el script de Cloudinary solo si no está cargado
+  useEffect(() => {
+    if (typeof window !== 'undefined' && !window.cloudinary) {
+      const script = document.createElement('script');
+      script.src = "https://upload-widget.cloudinary.com/global/all.js";
+      script.async = true;
+      script.onload = () => console.log('Cloudinary script loaded!');
+      document.body.appendChild(script);
+    }
+  }, []);
+
   function handleSubmit(e) {
     e.preventDefault();
     if (!name || !description || !price || !category || !images.length) {
-        return alert("Please fill out all the fields");
+      return alert("Please fill out all the fields");
     }
     createProduct({ name, description, price, category, images }).then(({ data }) => {
-        if (data.length > 0) {
-            setTimeout(() => {
-                navigate("/");
-            }, 1500);
-        }
+      if (data.length > 0) {
+        setTimeout(() => {
+          navigate("/");
+        }, 1500);
+      }
     });
-}
+  }
 
   const showWidget = () => {
+    // Verificar si Cloudinary está disponible antes de usarlo
+    if (!window.cloudinary) {
+      console.error('Cloudinary script no cargado');
+      return;
+    }
+
     const widget = window.cloudinary.createUploadWidget(
       {
         cloudName: 'dfhbptyd5',
-        uploadPreset: 'upload_cloudinary23'
+        uploadPreset: 'upload_cloudinary23',
       },
       (error, result) => {
         if (!error && result && result.event === "success") {
@@ -47,27 +64,26 @@ export default function NewProduct() {
     widget.open();
   };
 
-function handleRemoveImg(imgObj) {
-  setImgToRemove(imgObj.public_id);
-  console.log("Enviando solicitud DELETE con public_id:", imgObj.public_id);
+  function handleRemoveImg(imgObj) {
+    setImgToRemove(imgObj.public_id);
+    console.log("Enviando solicitud DELETE con public_id:", imgObj.public_id);
 
-  axios
-    .delete(`/images/${imgObj.public_id}/`)
-    .then((res) => {
-      console.log("Respuesta del servidor:", res);
-      if (res.status === 200) {
+    axios
+      .delete(`/images/${imgObj.public_id}/`)
+      .then((res) => {
+        console.log("Respuesta del servidor:", res);
+        if (res.status === 200) {
+          setImgToRemove(null);
+          setImages((prev) => prev.filter((img) => img.public_id !== imgObj.public_id));
+        } else {
+          console.error('No se pudo eliminar la imagen:', res.data);
+        }
+      })
+      .catch((e) => {
+        console.error('Error al eliminar la imagen:', e.response ? e.response.data : e.message);
         setImgToRemove(null);
-        setImages((prev) => prev.filter((img) => img.public_id !== imgObj.public_id));
-      } else {
-        console.error('No se pudo eliminar la imagen:', res.data);
-      }
-    })
-    .catch((e) => {
-      console.error('Error al eliminar la imagen:', e.response ? e.response.data : e.message);
-      setImgToRemove(null);
-    });
-}
-
+      });
+  }
 
   return (
     <Container>
@@ -113,9 +129,9 @@ function handleRemoveImg(imgObj) {
                 <Form.Label>Categoría</Form.Label>
                 <Form.Select value={category} onChange={(e) => setCategory(e.target.value)}>
                   <option value="" disabled>-- Selecciona una --</option>
-                  <option value="camisetas_version_fanaticos">Camisetas versión fanáticos</option>
-                  <option value="camisetas_version_jugador">Camisetas versión jugador</option>
-                  <option value="camisetas_retro">Camisetas Retro</option>
+                  <option value="CamisetasVersionFanaticos">Camisetas versión fanáticos</option>
+                  <option value="camisetasversionjugador">Camisetas versión jugador</option>
+                  <option value="camisetasRetro">Camisetas Retro</option>
                 </Form.Select>
               </Form.Group>
               <Form.Group className="mb-4">
@@ -123,8 +139,8 @@ function handleRemoveImg(imgObj) {
                 <div className='images-preview-container'>
                   {images.map((image) => (
                     <div key={image.public_id} className='images-preview'>
-                      <img src={image.url} alt="Uploaded"/>
-                      {imgToRemove !== image.public_id && <i className="fa fa-times-circle" onClick={()=> handleRemoveImg(image)}></i>}
+                      <img src={image.url} alt="Uploaded" />
+                      {imgToRemove !== image.public_id && <i className="fa fa-times-circle" onClick={() => handleRemoveImg(image)}></i>}
                     </div>
                   ))}
                 </div>

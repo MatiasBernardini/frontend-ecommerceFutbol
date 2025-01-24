@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import NewProduct from './pages/newProduct';
 import ProductPage from './pages/ProductPage';
+import CategoryPage from './pages/CategoryPage';
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -28,6 +29,7 @@ function App() {
           <Route path="*" element={<Home />} />
           <Route path="/new-Product" element={<NewProduct />} />
           <Route path="/products/:id" element={<ProductPage />} />
+          <Route path="/category/:category" element={<CategoryPage />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,6 +1,7 @@
 import axios from '../axios';
 import React, { useEffect, useState } from 'react'
 import AliceCarousel from 'react-alice-carousel';
+import "react-alice-carousel/lib/alice-carousel.css";
 import { Badge, Button, ButtonGroup, Col, Container, FormSelect, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Form, useParams } from 'react-router-dom';

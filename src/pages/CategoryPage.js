@@ -19,7 +19,6 @@ export default function CategoryPage() {
           .get(`/products/category/${category}`)
           .then(({ data }) => {
             console.log("Productos recibidos:", data);
-            console.log("category recibidos:", category);
             setLoading(false);
             setProducts(data);
           })
@@ -38,11 +37,28 @@ export default function CategoryPage() {
         product.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
+    // Switch para modificar el valor de category
+    let title = '';
+    switch (category) {
+        case 'camisetasversionjugador':
+            title = 'Camisetas Versión Jugador';
+            break;
+        case 'camisetasversionfanaticos':
+            title = 'Camisetas Versión Fanáticos';
+            break;
+        case 'camisetasretro':
+            title = 'Camisetas Retro';
+            break;
+        default:
+            title = 'Categoría no válida';
+            break;
+    }
+
     return (
         <div className='category-page-container'>
             <div className={`pt-3 ${category}-banner-container category-banner-container`}>
                 <h1 className='text-center'>
-                    {category ? category.charAt(0).toUpperCase() + category.slice(1) : 'Categoría no válida'}
+                    {title}
                 </h1>
             </div>
 

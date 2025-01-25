@@ -16,7 +16,6 @@ export default function NewProduct() {
   const navigate = useNavigate();
   const [createProduct, { isError, error, isLoading, isSuccess }] = useCreateProductMutation();
 
-  // Cargar el script de Cloudinary solo si no está cargado
   useEffect(() => {
     if (typeof window !== 'undefined' && !window.cloudinary) {
       const script = document.createElement('script');
@@ -42,7 +41,6 @@ export default function NewProduct() {
   }
 
   const showWidget = () => {
-    // Verificar si Cloudinary está disponible antes de usarlo
     if (!window.cloudinary) {
       console.error('Cloudinary script no cargado');
       return;
@@ -129,9 +127,9 @@ export default function NewProduct() {
                 <Form.Label>Categoría</Form.Label>
                 <Form.Select value={category} onChange={(e) => setCategory(e.target.value)}>
                   <option value="" disabled>-- Selecciona una --</option>
-                  <option value="CamisetasVersionFanaticos">Camisetas versión fanáticos</option>
+                  <option value="camisetasversionfanaticos">Camisetas versión fanáticos</option>
                   <option value="camisetasversionjugador">Camisetas versión jugador</option>
-                  <option value="camisetasRetro">Camisetas Retro</option>
+                  <option value="camisetasretro">Camisetas Retro</option>
                 </Form.Select>
               </Form.Group>
               <Form.Group className="mb-4">

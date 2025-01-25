@@ -1,0 +1,113 @@
+.category-page-container {
+    background-color: #f4f4f4;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+.category-banner-container {
+    background-color: #003366; 
+    color: white;
+    padding: 25px 0;
+    margin-bottom: 30px;
+    width: 100%; 
+    max-width: 1320px;
+    margin-left: auto; 
+    margin-right: auto; 
+    border-radius: 10px;
+}
+
+.category-banner-container h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    text-transform: capitalize;
+    margin: 0;
+    color: #f8f8f8;
+}
+
+.filters-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.filters-container input {
+    padding: 10px 15px;
+    font-size: 1rem;
+    width: 80%;
+    max-width: 500px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border 0.3s ease;
+}
+
+.filters-container input:focus {
+    border-color: #003366; 
+}
+
+.d-flex {
+    display: flex;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.product-preview {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 15px;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-preview:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.product-preview img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.product-preview h4 {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.product-preview p {
+    font-size: 1rem;
+    color: #666;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #333;
+    text-align: center;
+    margin-top: 50px;
+    font-weight: normal;
+}
+
+@media (max-width: 768px) {
+    .category-banner-container {
+        padding: 15px 0;
+    }
+    .category-banner-container h1 {
+        font-size: 2rem;
+    }
+}

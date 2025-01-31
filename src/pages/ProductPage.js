@@ -4,11 +4,13 @@ import AliceCarousel from 'react-alice-carousel';
 import "react-alice-carousel/lib/alice-carousel.css";
 import { Badge, Button, ButtonGroup, Col, Container, FormSelect, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { Form, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Loading from '../components/Loading';
 import SimilarProduct from '../components/SimilarProduct';
 import './ProductPage.css'
 import { LinkContainer } from 'react-router-bootstrap';
+import { useAddToCartMutation } from '../services/appApi';
+import ToastMessage from '../components/ToastMessage';
 
 export default function ProductPage() {
 
@@ -16,6 +18,7 @@ export default function ProductPage() {
     const user = useSelector(state => state.user);
     const [product, setProduct] = useState(null);
     const [similar, setSimilar] = useState(null);
+    const [addToCart, { isSuccess }] = useAddToCartMutation(); 
 
     const handleDragStart = (e) => e.preventDefault();
     useEffect(()=>{
@@ -71,7 +74,7 @@ export default function ProductPage() {
                             <option value="2">2</option>
                             <option value="3">3</option>
                         </FormSelect>
-                        <Button size="lg"> Agregar al Carrito </Button>
+                        <Button size="lg" onClick={() => addToCart({ userId: user._id, productId: id ,price: product.price, image: product.pictures[0].url })}> Agregar al Carrito </Button>
                     </ButtonGroup>
                 )}
 
@@ -80,6 +83,7 @@ export default function ProductPage() {
                         <Button size="lg" > Editar Producto </Button>
                     </LinkContainer>
                 )}
+                {isSuccess && <ToastMessage bg="info" title="Añadido al Carrito" body={`${product.name} esta en tu carrito`} />}
             </Col>
         </Row>
 

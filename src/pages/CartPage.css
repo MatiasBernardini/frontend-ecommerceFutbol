@@ -1,0 +1,127 @@
+.cart-container {
+    background-color: #f9f9f9;
+    padding: 30px 0;
+  }
+  
+  h1, .h3 {
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .cart-table {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    padding: 20px;
+  }
+  
+  .cart-table th {
+    background-color: #007bff; /* Azul para el fondo de los encabezados */
+    color: #fff; /* Letras blancas */
+    padding: 12px;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  
+  .cart-table td {
+    padding: 12px;
+    vertical-align: middle;
+    background-color: #fff; /* Fondo blanco para todas las celdas */
+  }
+  
+  .cart-table tr {
+    background-color: #fff; /* Fondo blanco para todas las filas */
+  }
+  
+  .cart-table img {
+    border-radius: 5px;
+  }
+  
+  .quantity-indicator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-size: 18px;
+  }
+  
+  .quantity-indicator i {
+    cursor: pointer;
+    color: #007bff; /* Azul para los iconos */
+    transition: color 0.3s ease;
+  }
+  
+  .quantity-indicator i:hover {
+    color: #0056b3;
+  }
+  
+  .cart-table td:first-child {
+    width: 30px;
+  }
+  
+  .cart-table td:nth-child(2),
+  .cart-table td:nth-child(3),
+  .cart-table td:nth-child(4),
+  .cart-table td:nth-child(5) {
+    text-align: center;
+    color: #333; /* Letras en gris oscuro para contraste */
+    font-weight: 600;
+  }
+  
+  .cart-table td:last-child {
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .cart-table i.fa-times {
+    color: #ff4d4d;
+    font-size: 20px;
+  }
+  
+  .cart-table i.fa-times:hover {
+    color: #e60000;
+  }
+  
+  .pt-2 {
+    margin-top: 10px;
+  }
+  
+  h3.h4 {
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .alert {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border-color: #bee5eb;
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+  
+  .alert-info {
+    background-color: #e2f4ff;
+    border-color: #b6ecfc;
+  }
+  
+  @media (max-width: 768px) {
+    .cart-container {
+      padding: 15px 10px;
+    }
+  
+    .cart-table td {
+      padding: 8px;
+    }
+  
+    .quantity-indicator {
+      font-size: 16px;
+    }
+  
+    .cart-table img {
+      width: 80px;
+      height: 80px;
+    }
+  }
+  

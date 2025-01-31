@@ -10,6 +10,10 @@ import Signup from './pages/Signup';
 import NewProduct from './pages/newProduct';
 import ProductPage from './pages/ProductPage';
 import CategoryPage from './pages/CategoryPage';
+import ScrollToTop from './components/ScrollToTop';
+import CartPage from './pages/CartPage';
+import 'font-awesome/css/font-awesome.min.css';
+
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -17,6 +21,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <ScrollToTop/>
         <Navigation />
         <Routes>
           <Route index element={<Home />} />
@@ -26,6 +31,13 @@ function App() {
               <Route path="/signup" element={<Signup />} />
             </>
           )}
+
+          {user && (
+            <>
+              <Route path='/cart/' element={<CartPage />}/> 
+            </>
+          )}
+
           <Route path="*" element={<Home />} />
           <Route path="/new-Product" element={<NewProduct />} />
           <Route path="/products/:id" element={<ProductPage />} />

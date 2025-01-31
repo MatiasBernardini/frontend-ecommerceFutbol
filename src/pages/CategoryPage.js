@@ -49,6 +49,9 @@ export default function CategoryPage() {
         case 'camisetasretro':
             title = 'Camisetas Retro';
             break;
+        case 'all':
+            title = 'Todas las Camisetas';
+            break;
         default:
             title = 'Categoría no válida';
             break;

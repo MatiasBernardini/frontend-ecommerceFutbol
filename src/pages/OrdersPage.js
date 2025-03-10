@@ -22,20 +22,20 @@ function OrdersPage() {
                 setLoading(false);
                 console.log(e);
             });
-    }, []);
+    }, [user._id]);
 
     if (loading) {
         return <Loading />;
     }
 
     if (orders.length === 0) {
-        return <h1 className="text-center pt-3">No tienes ninguna orden</h1>;
+        return <h1 className="orders-page-empty-message">No tienes ninguna orden</h1>;
     }
 
     return (
-        <Container>
-            <h1 className="text-center">Tus ordenes</h1>
-            <Table responsive striped bordered hover>
+        <Container className="orders-page-container">
+            <h1 className="orders-page-title">Tus ordenes</h1>
+            <Table responsive striped bordered hover className="orders-page-table">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -46,15 +46,19 @@ function OrdersPage() {
                 </thead>
                 <tbody>
                     {orders.map((order) => (
-                        <tr>
+                        <tr key={order._id}>
                             <td>{order._id}</td>
                             <td>
-                                <Badge bg={`${order.status === "processing" ? "warning" : "success"}`} text="white">
+                                <Badge
+                                    className={`orders-page-badge ${
+                                        order.status === "processing" ? "orders-page-badge-warning" : "orders-page-badge-success"
+                                    }`}
+                                    text="white"
+                                >
                                     {order.status}
                                 </Badge>
                             </td>
                             <td>{order.date}</td>
-
                             <td>${order.total}</td>
                         </tr>
                     ))}

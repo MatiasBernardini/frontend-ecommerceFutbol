@@ -62,7 +62,7 @@ export default function ProductPage() {
                 <p>
                     <Badge bg='primary' > {product.category} </Badge>
                 </p>
-                <p className='product__price' > <text>$</text>{product.price} </p>
+                <p className='product__price' > <span>$</span>{product.price} </p>
                 <p style={{textAlign: "justify"}} className='py-3' >
                     <strong> Descripción: </strong> {product.description}
                 </p>

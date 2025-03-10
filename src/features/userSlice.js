@@ -16,6 +16,7 @@ export const userSlice = createSlice({
     builder.addMatcher(appApi.endpoints.removeFromCart.matchFulfilled, (_, { payload }) => payload);
     builder.addMatcher(appApi.endpoints.increaseCartProduct.matchFulfilled, (_, { payload }) => payload);
     builder.addMatcher(appApi.endpoints.decreaseCartProduct.matchFulfilled, (_, { payload }) => payload);
+    builder.addMatcher(appApi.endpoints.createOrder.matchFulfilled, (_, { payload }) => payload);
   },
 });
 

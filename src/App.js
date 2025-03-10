@@ -13,6 +13,7 @@ import CategoryPage from './pages/CategoryPage';
 import ScrollToTop from './components/ScrollToTop';
 import CartPage from './pages/CartPage';
 import 'font-awesome/css/font-awesome.min.css';
+import OrdersPage from './pages/OrdersPage';
 
 
 function App() {
@@ -34,7 +35,8 @@ function App() {
 
           {user && (
             <>
-              <Route path='/cart/' element={<CartPage />}/> 
+              <Route path='/cart' element={<CartPage />}/> 
+              <Route path='/orders' element={<OrdersPage />}/> 
             </>
           )}
 

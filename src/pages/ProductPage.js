@@ -79,7 +79,7 @@ export default function ProductPage() {
                 )}
 
                 {user && user.isAdmin && (
-                    <LinkContainer to={`/products/${product._id}/edit`} >
+                    <LinkContainer to={`/product/${product._id}/edit`} >
                         <Button size="lg" > Editar Producto </Button>
                     </LinkContainer>
                 )}

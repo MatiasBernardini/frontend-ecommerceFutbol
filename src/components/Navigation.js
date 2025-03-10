@@ -46,7 +46,7 @@ function Navigation() {
               <NavDropdown title={`${user.email}`} id="basic-nav-dropdown">
                 {user.isAdmin && (
                   <>
-                    <LinkContainer to="/dashboard">
+                    <LinkContainer to="/admin">
                       <NavDropdown.Item>Tablero</NavDropdown.Item>
                     </LinkContainer>
 

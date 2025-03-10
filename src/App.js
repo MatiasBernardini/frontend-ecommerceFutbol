@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes} from 'react-router-dom';
 import Navigation from './components/Navigation';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -14,6 +14,8 @@ import ScrollToTop from './components/ScrollToTop';
 import CartPage from './pages/CartPage';
 import 'font-awesome/css/font-awesome.min.css';
 import OrdersPage from './pages/OrdersPage';
+import AdminDashboard from './pages/AdminDashboard';
+import EditProductPage from './pages/EditProductPage';
 
 
 function App() {
@@ -37,6 +39,14 @@ function App() {
             <>
               <Route path='/cart' element={<CartPage />}/> 
               <Route path='/orders' element={<OrdersPage />}/> 
+            </>
+          )}
+
+          {user && user.isAdmin && (
+            <>
+              <Route path='/admin' element={<AdminDashboard />}/> 
+              <Route path='/product/:id/edit' element={<EditProductPage />}/> 
+
             </>
           )}
 

@@ -3,7 +3,7 @@ import { Badge, Button, Modal, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import axios from "../axios";
 import Loading from "./Loading";
-//import Pagination from "./Pagination";
+import Pagination from "./Pagination";
 
 function OrdersAdminPage() {
     const [orders, setOrders] = useState([]);
@@ -94,7 +94,7 @@ function OrdersAdminPage() {
                     </tr>
                 </thead>
                 <tbody>
-
+                    <Pagination data={orders} RenderComponent={TableRow} pageLimit={1} dataLimit={10} tablePagination={true} />
                 </tbody>
             </Table>
 

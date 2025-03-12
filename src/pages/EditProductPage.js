@@ -6,7 +6,6 @@ import axios from "../axios";
 import "./EditProductPage.css";
 
 export default function EditProductPage() {
-
     const { id } = useParams();
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
@@ -18,6 +17,16 @@ export default function EditProductPage() {
     const [updateProduct, { isError, error, isLoading, isSuccess }] = useUpdateProductMutation();
 
     useEffect(() => {
+        if (typeof window !== 'undefined' && !window.cloudinary) {
+            const script = document.createElement('script');
+            script.src = "https://upload-widget.cloudinary.com/global/all.js";
+            script.async = true;
+            script.onload = () => console.log('Cloudinary script loaded!');
+            document.body.appendChild(script);
+        }
+    }, []);
+
+    useEffect(() => {
         axios
             .get("/products/" + id)
             .then(({ data }) => {
@@ -25,7 +34,7 @@ export default function EditProductPage() {
                 setName(product.name);
                 setDescription(product.description);
                 setCategory(product.category);
-                setImages(product.pictures);
+                setImages(product.pictures || []);
                 setPrice(product.price);
             })
             .catch((e) => console.log(e));
@@ -57,75 +66,82 @@ export default function EditProductPage() {
     }
 
     function showWidget() {
+        if (!window.cloudinary) {
+            console.error('Cloudinary script no cargado');
+            return;
+        }
+
         const widget = window.cloudinary.createUploadWidget(
             {
-                cloudName: "your-cloudname",
-                uploadPreset: "your-preset",
+                cloudName: 'dfhbptyd55',
+                uploadPreset: 'upload_cloudinary23',
             },
             (error, result) => {
                 if (!error && result.event === "success") {
-                    setImages((prev) => [...prev, { url: result.info.url, public_id: result.info.public_id }]);
+                    setImages((prev) => [...prev, { url: result.info.secure_url, public_id: result.info.public_id }]);
+                } else if (error) {
+                    console.error('Error uploading image:', error);
                 }
             }
         );
         widget.open();
     }
 
-  return (
-    <Container>
-        <Row>
-            <Col md={6} className="new-product__form--container">
-                <Form style={{ width: "100%" }} onSubmit={handleSubmit}>
-                    <h1 className="mt-4">Editar producto</h1>
-                    {isSuccess && <Alert variant="success">Producto actualizado</Alert>}
-                    {isError && <Alert variant="danger">{error.data}</Alert>}
-                    <Form.Group className="mb-3">
-                        <Form.Label>Nombre del Producto</Form.Label>
-                        <Form.Control type="text" placeholder="Enter product name" value={name} required onChange={(e) => setName(e.target.value)} />
-                    </Form.Group>
+    return (
+        <Container>
+            <Row>
+                <Col md={6} className="new-product__form--container">
+                    <Form style={{ width: "100%" }} onSubmit={handleSubmit}>
+                        <h1 className="mt-4">Editar producto</h1>
+                        {isSuccess && <Alert variant="success">Producto actualizado</Alert>}
+                        {isError && <Alert variant="danger">{error.data}</Alert>}
+                        <Form.Group className="mb-3">
+                            <Form.Label>Nombre del Producto</Form.Label>
+                            <Form.Control type="text" placeholder="Nombre del Producto" value={name} required onChange={(e) => setName(e.target.value)} />
+                        </Form.Group>
 
-                    <Form.Group className="mb-3">
-                        <Form.Label>Descripcion del Producto </Form.Label>
-                        <Form.Control as="textarea" placeholder="Product description" style={{ height: "100px" }} value={description} required onChange={(e) => setDescription(e.target.value)} />
-                    </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Descripcion del Producto </Form.Label>
+                            <Form.Control as="textarea" placeholder="Descripcion" style={{ height: "100px" }} value={description} required onChange={(e) => setDescription(e.target.value)} />
+                        </Form.Group>
 
-                    <Form.Group className="mb-3">
-                        <Form.Label>Precio($)</Form.Label>
-                        <Form.Control type="number" placeholder="Price ($)" value={price} required onChange={(e) => setPrice(e.target.value)} />
-                    </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Precio($)</Form.Label>
+                            <Form.Control type="number" placeholder="Precio ($)" value={price} required onChange={(e) => setPrice(e.target.value)} />
+                        </Form.Group>
 
-                    <Form.Group className="mb-3" onChange={(e) => setCategory(e.target.value)}>
-                        <Form.Label>Categoria</Form.Label>
-                        <Form.Select value={category}>
-                            <option value="" disabled>-- Selecciona una --</option>
-                            <option value="camisetasversionfanaticos">Camisetas versión fanáticos</option>
-                            <option value="camisetasversionjugador">Camisetas versión jugador</option>
-                            <option value="camisetasretro">Camisetas Retro</option>
-                        </Form.Select>
-                    </Form.Group>
+                        <Form.Group className="mb-3" onChange={(e) => setCategory(e.target.value)}>
+                            <Form.Label>Categoria</Form.Label>
+                            <Form.Select value={category}>
+                                <option value="" disabled>-- Selecciona una --</option>
+                                <option value="camisetasversionfanaticos">Camisetas versión fanáticos</option>
+                                <option value="camisetasversionjugador">Camisetas versión jugador</option>
+                                <option value="camisetasretro">Camisetas Retro</option>
+                            </Form.Select>
+                        </Form.Group>
 
-                    <Form.Group className="mb-3">
-                        <Button type="button" onClick={showWidget}>
-                            Imagenes
-                        </Button>
-                        <div className="images-preview-container">
-                            {images.map((image) => (
-                                <div className="image-preview">
-                                    <img src={image.url} />
-                                    {imgToRemove != image.public_id && <i className="fa fa-times-circle" onClick={() => handleRemoveImg(image)}></i>}
-                                </div>
-                            ))}
-                        </div>
-                    </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Button type="button" onClick={showWidget}>
+                                Imagenes
+                            </Button>
+                            <div className="images-preview-container">
+                                {images.map((image) => (
+                                    <div className="image-preview" key={image.public_id}>
+                                        <img src={image.url} alt="Imagen subida" />
+                                        {imgToRemove != image.public_id && <i className="fa fa-times-circle" onClick={() => handleRemoveImg(image)}></i>}
+                                    </div>
+                                ))}
+                            </div>
+                        </Form.Group>
 
-                    <Form.Group>
-                        <Button type="submit" disabled={isLoading || isSuccess}>
-                            Actualizar Producto
-                        </Button>
-                    </Form.Group>
-                </Form>
-            </Col>
-        </Row>
-    </Container>
-  )
+                        <Form.Group>
+                            <Button type="submit" disabled={isLoading || isSuccess}>
+                                Actualizar Producto
+                            </Button>
+                        </Form.Group>
+                    </Form>
+                </Col>
+            </Row>
+        </Container>
+    );
 }

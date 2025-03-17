@@ -54,7 +54,7 @@ export default function EditProductPage() {
     function handleSubmit(e) {
         e.preventDefault();
         if (!name || !description || !price || !category || !images.length) {
-            return alert("Faltan Campos por llenar");
+            return alert("Faltan campos por completar");
         }
         updateProduct({ id, name, description, price, category, images }).then(({ data }) => {
             if (data.length > 0) {
@@ -92,7 +92,7 @@ export default function EditProductPage() {
             <Row>
                 <Col md={6} className="new-product__form--container">
                     <Form style={{ width: "100%" }} onSubmit={handleSubmit}>
-                        <h1 className="mt-4">Editar producto</h1>
+                        <h1 className="mt-4">Editar Producto</h1>
                         {isSuccess && <Alert variant="success">Producto actualizado</Alert>}
                         {isError && <Alert variant="danger">{error.data}</Alert>}
                         <Form.Group className="mb-3">
@@ -101,8 +101,8 @@ export default function EditProductPage() {
                         </Form.Group>
 
                         <Form.Group className="mb-3">
-                            <Form.Label>Descripcion del Producto </Form.Label>
-                            <Form.Control as="textarea" placeholder="Descripcion" style={{ height: "100px" }} value={description} required onChange={(e) => setDescription(e.target.value)} />
+                            <Form.Label>Descripción del Producto</Form.Label>
+                            <Form.Control as="textarea" placeholder="Descripción" style={{ height: "100px" }} value={description} required onChange={(e) => setDescription(e.target.value)} />
                         </Form.Group>
 
                         <Form.Group className="mb-3">
@@ -111,7 +111,7 @@ export default function EditProductPage() {
                         </Form.Group>
 
                         <Form.Group className="mb-3" onChange={(e) => setCategory(e.target.value)}>
-                            <Form.Label>Categoria</Form.Label>
+                            <Form.Label>Categoría</Form.Label>
                             <Form.Select value={category}>
                                 <option value="" disabled>-- Selecciona una --</option>
                                 <option value="camisetasversionfanaticos">Camisetas versión fanáticos</option>
@@ -122,13 +122,13 @@ export default function EditProductPage() {
 
                         <Form.Group className="mb-3">
                             <Button type="button" onClick={showWidget}>
-                                Imagenes
+                                Imágenes
                             </Button>
                             <div className="images-preview-container">
                                 {images.map((image) => (
                                     <div className="image-preview" key={image.public_id}>
                                         <img src={image.url} alt="Imagen subida" />
-                                        {imgToRemove != image.public_id && <i className="fa fa-times-circle" onClick={() => handleRemoveImg(image)}></i>}
+                                        {imgToRemove !== image.public_id && <i className="fa fa-times-circle" onClick={() => handleRemoveImg(image)}></i>}
                                     </div>
                                 ))}
                             </div>

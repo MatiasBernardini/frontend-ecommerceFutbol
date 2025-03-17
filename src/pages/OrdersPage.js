@@ -29,12 +29,12 @@ function OrdersPage() {
     }
 
     if (orders.length === 0) {
-        return <h1 className="orders-page-empty-message">No tienes ninguna orden</h1>;
+        return <h1 className="orders-page-empty-message">No tienes órdenes</h1>;
     }
 
     return (
         <Container className="orders-page-container">
-            <h1 className="orders-page-title">Tus ordenes</h1>
+            <h1 className="orders-page-title">Tus órdenes</h1>
             <Table responsive striped bordered hover className="orders-page-table">
                 <thead>
                     <tr>

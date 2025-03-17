@@ -21,8 +21,8 @@ function Signup() {
                 <Col md={6} className='signup__form--container'>
                     <Form style={{width: "100%"}} onSubmit={handleSignup} >
 
-                        <h1> Crea tu Cuenta </h1>
-                        {isError && <Alert variant="Danger">{error.data}</Alert>}
+                        <h1> Crea tu cuenta </h1>
+                        {isError && <Alert variant="danger">{error.data}</Alert>}
 
                         <Form.Group className="mb-4">
                             <Form.Label>Nombre</Form.Label>
@@ -30,7 +30,7 @@ function Signup() {
                         </Form.Group>
 
                         <Form.Group className="mb-4">
-                            <Form.Label>Correo Electronico</Form.Label>
+                            <Form.Label>Correo electrónico</Form.Label>
                             <Form.Control type="email" placeholder="Email" value={email} required onChange={(e)=> setEmail(e.target.value)} />
                         </Form.Group>
 
@@ -40,10 +40,10 @@ function Signup() {
                         </Form.Group>
 
                         <Form.Group className="mb-3"> 
-                            <Button type="submit" disabled={isLoading}>Crear Cuenta</Button>
+                            <Button type="submit" disabled={isLoading}>Crear cuenta</Button>
                         </Form.Group>
 
-                        <p>Si todavia no tiene una cuenta creada, en esta pagina podra crearla</p>
+                        <p>Si todavía no tienes una cuenta creada, en esta página podrás crearla.</p>
                     </Form>
                 </Col>
                 <Col md={6} className="signup__image--container"></Col>

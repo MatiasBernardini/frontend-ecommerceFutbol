@@ -22,10 +22,14 @@ function Home() {
 
   return (
     <div>
-      <img src="https://templofutbol.vtexassets.com/assets/vtex.file-manager-graphql/images/1f564347-0f8d-43bd-af7d-bf7be54d2541___188dc6f9b03ea2e3a062038eb65ecaa5.jpg" className='home-banner' alt="Home Banner" />
+      <img 
+        src="https://templofutbol.vtexassets.com/assets/vtex.file-manager-graphql/images/1f564347-0f8d-43bd-af7d-bf7be54d2541___188dc6f9b03ea2e3a062038eb65ecaa5.jpg" 
+        className='home-banner' 
+        alt="Banner principal de la tienda" 
+      />
 
       <div className="featured-products-container container mt-4">
-        <h2> Últimos Productos </h2>
+        <h2>Últimos Productos</h2>
         <div className="d-flex justify-content-center flex-wrap">
           {lastProducts.map((product) => (
             <ProductPreview key={product._id} {...product} />
@@ -33,12 +37,12 @@ function Home() {
         </div>
 
         <div>
-          <Link to="/category/all" style={{ textAlign: "right", display: "block", textDecoration: "none" }}> Ver Más {">>"}</Link>
+          <Link to="/category/all" style={{ textAlign: "right", display: "block", textDecoration: "none" }}>Ver más {">>"}</Link>
         </div>
       </div>
 
       <div className='sale__banner--container mt-4'>
-        <img src='https://i.ytimg.com/vi/4XEI5D-rggs/maxresdefault.jpg' alt="Sale Banner" />
+        <img src='https://i.ytimg.com/vi/4XEI5D-rggs/maxresdefault.jpg' alt="Banner de venta" />
       </div>
 
       <div className="recent-products-container container mt-4">

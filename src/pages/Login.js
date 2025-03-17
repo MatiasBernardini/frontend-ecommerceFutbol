@@ -27,23 +27,23 @@ function Login() {
       <Row>
         <Col md={6} className='login__form--container'>
           <Form style={{ width: "100%" }} onSubmit={handleSubmit}>
-            <h1>Inicia Sesion en tu Cuenta</h1>
-            {isError && <p style={{ color: 'red' }}>{error.data?.message || 'Failed to login'}</p>}
+            <h1>Inicia sesión en tu cuenta</h1>
+            {isError && <p style={{ color: 'red' }}>{error.data?.message || 'Error al iniciar sesión'}</p>}
             <Form.Group className="mb-4">
-              <Form.Label>Email Address</Form.Label>
+              <Form.Label>Correo electrónico</Form.Label>
               <Form.Control
                 type="email"
-                placeholder="Enter Email"
+                placeholder="Ingresa tu correo electrónico"
                 value={email}
                 required
                 onChange={(e) => setEmail(e.target.value)}
               />
             </Form.Group>
             <Form.Group className="mb-4">
-              <Form.Label>Password</Form.Label>
+              <Form.Label>Contraseña</Form.Label>
               <Form.Control
                 type="password"
-                placeholder="Enter Password"
+                placeholder="Ingresa tu contraseña"
                 value={password}
                 required
                 onChange={(e) => setPassword(e.target.value)}
@@ -51,10 +51,10 @@ function Login() {
             </Form.Group>
             <Form.Group className="mb-4">
               <Button type="submit" disabled={isLoading}>
-                {isLoading ? 'Logging in...' : 'Login'}
+                {isLoading ? 'Iniciando sesión...' : 'Iniciar sesión'}
               </Button>
             </Form.Group>
-            <p>Si todavia no tiene una cuenta creada, <Link to="/signup">toque aqui</Link></p>
+            <p>Si todavía no tienes una cuenta, <Link to="/signup">haz clic aquí</Link> para crear una.</p>
           </Form>
         </Col>
         <Col md={6} className="login__image--container"></Col>

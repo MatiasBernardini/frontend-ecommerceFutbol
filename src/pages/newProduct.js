@@ -21,7 +21,7 @@ export default function NewProduct() {
       const script = document.createElement('script');
       script.src = "https://upload-widget.cloudinary.com/global/all.js";
       script.async = true;
-      script.onload = () => console.log('Cloudinary script loaded!');
+      script.onload = () => console.log('¡Script de Cloudinary cargado!');
       document.body.appendChild(script);
     }
   }, []);
@@ -29,7 +29,7 @@ export default function NewProduct() {
   function handleSubmit(e) {
     e.preventDefault();
     if (!name || !description || !price || !category || !images.length) {
-      return alert("Please fill out all the fields");
+      return alert("Por favor, complete todos los campos");
     }
     createProduct({ name, description, price, category, images }).then(({ data }) => {
       if (data.length > 0) {
@@ -42,7 +42,7 @@ export default function NewProduct() {
 
   const showWidget = () => {
     if (!window.cloudinary) {
-      console.error('Cloudinary script no cargado');
+      console.error('El script de Cloudinary no ha sido cargado');
       return;
     }
 
@@ -55,7 +55,7 @@ export default function NewProduct() {
         if (!error && result && result.event === "success") {
           setImages((prev) => [...prev, { url: result.info.secure_url, public_id: result.info.public_id }]);
         } else if (error) {
-          console.error('Error uploading image:', error);
+          console.error('Error al subir la imagen:', error);
         }
       }
     );
@@ -93,7 +93,7 @@ export default function NewProduct() {
               {isSuccess && <Alert variant="success">Producto creado con éxito</Alert>}
               {isError && <p style={{ color: 'red' }}>{error?.data?.message || 'Error al crear el Producto'}</p>}
               <Form.Group className="mb-4">
-                <Form.Label>Nombre de producto</Form.Label>
+                <Form.Label>Nombre del producto</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Ingresar Nombre del Producto"
@@ -137,7 +137,7 @@ export default function NewProduct() {
                 <div className='images-preview-container'>
                   {images.map((image) => (
                     <div key={image.public_id} className='images-preview'>
-                      <img src={image.url} alt="Uploaded" />
+                      <img src={image.url} alt="Imagen subida" />
                       {imgToRemove !== image.public_id && <i className="fa fa-times-circle" onClick={() => handleRemoveImg(image)}></i>}
                     </div>
                   ))}

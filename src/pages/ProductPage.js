@@ -74,21 +74,21 @@ export default function ProductPage() {
                             <option value="2">2</option>
                             <option value="3">3</option>
                         </FormSelect>
-                        <Button size="lg" onClick={() => addToCart({ userId: user._id, productId: id ,price: product.price, image: product.pictures[0].url })}> Agregar al Carrito </Button>
+                        <Button size="lg" onClick={() => addToCart({ userId: user._id, productId: id ,price: product.price, image: product.pictures[0].url })}> Agregar al carrito </Button>
                     </ButtonGroup>
                 )}
 
                 {user && user.isAdmin && (
                     <LinkContainer to={`/product/${product._id}/edit`} >
-                        <Button size="lg" > Editar Producto </Button>
+                        <Button size="lg" > Editar producto </Button>
                     </LinkContainer>
                 )}
-                {isSuccess && <ToastMessage bg="info" title="Añadido al Carrito" body={`${product.name} esta en tu carrito`} />}
+                {isSuccess && <ToastMessage bg="info" title="Añadido al carrito" body={`${product.name} está en tu carrito`} />}
             </Col>
         </Row>
 
         <div className='my-4'>
-            <h2> Productos Similares </h2>
+            <h2> Productos similares </h2>
             <div className="d-flex justify-content-center aling-items-center flex-wrap">
                 <AliceCarousel mouseTracking items={similarProducts} responsive={responsive} controlsStrategy='alternate'/>
             </div>

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useDeleteProductMutation } from "../services/appApi";
 import "./DashboardProducts.css";
-//import Pagination from "./Pagination";
+import Pagination from "./Pagination";
 
 function DashboardProducts() {
     const products = useSelector((state) => state.products);
@@ -46,22 +46,7 @@ function DashboardProducts() {
                 </tr>
             </thead>
             <tbody>
-                {products.map((product) =>(
-                    <tr>
-                        <td>
-                            <img src={product.pictures[0].url} className="dashboard-product-preview" />
-                        </td>
-                        <td>{product._id}</td>
-                        <td>{product.name}</td>
-                        <td>{product.price}</td>
-                        <td>
-                            <Button onClick={()=> handleDeleteProduct(product._id, user._id)} >Eliminar</Button>
-                            <Link to={`/product/${product._id}/edit`} className="btn btn-warning">
-                                Editar
-                            </Link>
-                        </td>
-                    </tr>
-                ))}
+                <Pagination data={products} RenderComponent={TableRow} pageLimit={1} dataLimit={5} tablePagination={true} />
             </tbody>
         </Table>
     );

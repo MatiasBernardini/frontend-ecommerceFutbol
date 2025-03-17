@@ -27,7 +27,7 @@ export default function CartPage() {
   return (
     <Container style= {{minHeight: "95vh"}} className='cart-container' >
       <Row>
-        <Col md={7}>
+        <Col>
           <h1 className='pt-2 h3'> Carrito </h1>
           {cart.length === 0 ? (
             <Alert variant='info' > El carrito de compras esta vacio, si quiere puede agregar productos </Alert>
@@ -36,51 +36,51 @@ export default function CartPage() {
               </Elements>}
         </Col>
 
-        <Col md={5}>
-          {cart.length > 0 && (
-            <>
-              <Table responsive="sm" className="cart-table">
-                <thead>
-                  <tr>
-                    <th>&nbsp;</th>
-                    <th>Producto</th>
-                    <th>Precio</th>
-                    <th>Cantidad</th>
-                    <th>Total</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {cart.map(item => (
+        {cart.length > 0 && (
+          <Col md={5}>
+              <>
+                <Table responsive="sm" className="cart-table">
+                  <thead>
                     <tr>
-                      <td>&nbsp;</td>
-                      <td>
-                        {!isLoading && <i className='fa fa-times' style={{marginRight: 10, cursor:"pointer"}} onClick={() => removeFromCart({productId:item._id, price: item.price, userId: user._id})}></i>}
-                        <img src={item.pictures[0].url} style={{width: 100, height: 100, objectFit:"cover"}} />
-                      </td>
-
-                      <td>${item.price}</td>
-                      
-                      <td>
-                        <span className='quantity-indicator'>
-                          <i className='fa fa-minus-circle' onClick={() => handleDecrease({productId:item._id, price: item.price, userId: user._id})} ></i>
-                          <span>{user.cart[item._id]}</span>
-                          <i className='fa fa-plus-circle' onClick={() => increaseCart({productId:item._id, price: item.price, userId: user._id})} ></i>
-                        </span>
-                      </td>
-
-                      <td>${item.price * user.cart[item._id]}</td>
+                      <th>&nbsp;</th>
+                      <th>Producto</th>
+                      <th>Precio</th>
+                      <th>Cantidad</th>
+                      <th>Total</th>
                     </tr>
-                  ))}
-                </tbody>
-              </Table>
-              <div>
-                <h3 className='h4 pt-4'> Total: ${user.cart.total} </h3>
-              </div>
-            </>
+                  </thead>
 
-          )}
-        </Col>
+                  <tbody>
+                    {cart.map(item => (
+                      <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                          {!isLoading && <i className='fa fa-times' style={{marginRight: 10, cursor:"pointer"}} onClick={() => removeFromCart({productId:item._id, price: item.price, userId: user._id})}></i>}
+                          <img src={item.pictures[0].url} style={{width: 100, height: 100, objectFit:"cover"}} />
+                        </td>
+
+                        <td>${item.price}</td>
+                        
+                        <td>
+                          <span className='quantity-indicator'>
+                            <i className='fa fa-minus-circle' onClick={() => handleDecrease({productId:item._id, price: item.price, userId: user._id})} ></i>
+                            <span>{user.cart[item._id]}</span>
+                            <i className='fa fa-plus-circle' onClick={() => increaseCart({productId:item._id, price: item.price, userId: user._id})} ></i>
+                          </span>
+                        </td>
+
+                        <td>${item.price * user.cart[item._id]}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+                <div>
+                  <h3 className='h4 pt-4'> Total: ${user.cart.total} </h3>
+                </div>
+              </>
+          </Col>
+        )}
+
       </Row>
     </Container>
   )

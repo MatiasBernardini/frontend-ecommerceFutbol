@@ -32,12 +32,22 @@ function Navigation() {
     if (bellRef.current) {
       const position = bellRef.current.getBoundingClientRect();
       setBellPos(position);
+      notificationRef.current.style.display = notificationRef.current.style.display === "block" ? "none" : "block";
+      dispatch(resetNotifications());
+      if (unreadNotifications > 0) axios.post(`/users/${user._id}/updateNotifications`);
     }
 
     setNotificationsVisible(!notificationsVisible);
     dispatch(resetNotifications());
     if (unreadNotifications > 0) axios.post(`/users/${user._id}/updateNotifications`);
   }
+
+  const notificationStyle = {
+    position: "absolute",
+    top: bellPos.top + 30, 
+    right: Math.min(window.innerWidth - 220, bellPos.right), 
+    display: notificationsVisible ? "block" : "none",
+  };
 
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
@@ -122,12 +132,7 @@ function Navigation() {
         <div
           className="notifications-container"
           ref={notificationRef}
-          style={{
-            position: "absolute",
-            top: bellPos.top + 30,
-            right: 0,
-            display: notificationsVisible ? "block" : "none",
-          }}
+          style={notificationStyle}
         >
           {user?.notifications.length > 0 ? (
             user?.notifications.map((notification, index) => (

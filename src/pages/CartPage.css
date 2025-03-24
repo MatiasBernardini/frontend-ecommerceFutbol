@@ -17,8 +17,8 @@
   }
   
   .cart-table th {
-    background-color: #007bff; /* Azul para el fondo de los encabezados */
-    color: #fff; /* Letras blancas */
+    background-color: #007bff;
+    color: #fff; 
     padding: 12px;
     text-align: left;
     font-size: 16px;
@@ -28,11 +28,11 @@
   .cart-table td {
     padding: 12px;
     vertical-align: middle;
-    background-color: #fff; /* Fondo blanco para todas las celdas */
+    background-color: #fff;
   }
   
   .cart-table tr {
-    background-color: #fff; /* Fondo blanco para todas las filas */
+    background-color: #fff; 
   }
   
   .cart-table img {
@@ -49,7 +49,7 @@
   
   .quantity-indicator i {
     cursor: pointer;
-    color: #007bff; /* Azul para los iconos */
+    color: #007bff; 
     transition: color 0.3s ease;
   }
   
@@ -66,7 +66,7 @@
   .cart-table td:nth-child(4),
   .cart-table td:nth-child(5) {
     text-align: center;
-    color: #333; /* Letras en gris oscuro para contraste */
+    color: #333; 
     font-weight: 600;
   }
   

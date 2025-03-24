@@ -49,15 +49,15 @@
   .notifications-container {
     padding: 20px;
     max-height: 200px;
-    overflow-y: auto;  /* Para que el contenido sea desplazable */
+    overflow-y: auto; 
     border: 1px solid gray;
     background-color: white;
-    width: 255px; /* Ancho adecuado para las notificaciones */
+    width: 255px; 
     z-index: 99;
     position: absolute;
-    top: 50px; /* Ajuste vertical */
+    top: 50px;
     right: 0;
-    max-width: calc(100% - 20px); /* Evita que el contenedor se salga de la pantalla */
+    max-width: calc(100% - 20px); 
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
   
@@ -94,7 +94,7 @@
   
   @media (max-width: 768px) {
     .notifications-container {
-      width: 100%; /* En pantallas más pequeñas, ocupamos todo el ancho */
+      width: 100%;
       right: 0;
     }
   }
